@@ -1,10 +1,12 @@
 {
   "name": "react-round-progress",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A react component for all your circular progress needs",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./lib && tsc",
+    "prepare": "npm run build"
   },
   "author": "",
   "license": "MIT",
