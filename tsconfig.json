@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
       "outDir": "./lib",
-      "target": "es5",
-      "module": "commonjs",
+      "target": "es2015",
       "noImplicitAny": true,
       "strictNullChecks": true,
       "removeComments": true,
@@ -12,13 +11,15 @@
       "typeRoots": [
         "index.d.ts",
         "node_modules/@types"
-      ]
+      ],
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node"
     },
     "include": [
       "./src/**/*.tsx",
       "./src/**/*.ts"
     ],
     "exclude": [
-      "node_modules"
+      "./node_modules/**"
     ]
   }
