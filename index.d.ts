@@ -4,7 +4,7 @@ import RoundProgress from "./src/RoundProgress";
 export interface ReactRoundProgressProps
   extends React.ComponentProps<typeof RoundProgress> {
   value: number;
-  id: string;
+  id?: string;
   range?: number;
   centralNeedle?: boolean;
   gaugeMarks?: boolean;

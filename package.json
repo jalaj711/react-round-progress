@@ -1,6 +1,6 @@
 {
   "name": "react-round-progress",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A react component for all your circular progress needs",
   "main": "lib/index.js",
   "scripts": {

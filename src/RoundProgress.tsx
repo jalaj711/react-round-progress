@@ -1,13 +1,9 @@
 import { useEffect, useMemo } from "react";
 import React from 'react'
 
-const colors = {
-    primary: "#4caf50"
-}
-
 function CircularProgress(props: {
   value: number;
-  id: string;
+  id?: string;
   range?: number;
   centralNeedle?: boolean;
   gaugeMarks?: boolean;
@@ -23,16 +19,19 @@ function CircularProgress(props: {
   const radius = dimension / 2 - lineWidth;
   const range = props.range || 360;
   const colorsObject = useMemo(() => ({
-    stroke: (props.colors && props.colors.stroke) || colors.primary,
+    stroke: (props.colors && props.colors.stroke) || "#4caf50",
     gaugeMarks: (props.colors && props.colors.gaugeMarks) || "#fff",
     needle: (props.colors && props.colors.needle) || "#fff",
     backgroundTrack: (props.colors && props.colors.backgroundTrack) || "rgba(255, 255, 255, 0.1)"
   }), [props.colors])
+  const canvasid = props.id || "round-progress-" + Math.random().toString(36).slice(2);
 
   // Offset required for
   const offsetInDegrees = props.offSet || 90;
+
+
   useEffect(() => {
-    var can = document.getElementById(props.id) as HTMLCanvasElement;
+    var can = document.getElementById(canvasid) as HTMLCanvasElement;
     const ctx = can.getContext("2d");
 
     var centreX = can.width / 2,
@@ -131,11 +130,11 @@ function CircularProgress(props: {
       drawValue();
     }
   }, [
-    props.id,
     props.value,
     props.gaugeMarks,
     props.centralNeedle,
     props.gaugeMarkSeperation,
+    canvasid,
     radius,
     lineWidth,
     range,
@@ -145,14 +144,14 @@ function CircularProgress(props: {
 
   return (
     <>
-      <div className="progressWrap">
-        <canvas id={props.id} width={dimension} height={dimension}></canvas>
+      <div className={canvasid + "-wrapper"}>
+        <canvas id={canvasid} width={dimension} height={dimension}></canvas>
         {props.showValue && (
-          <span className="progressValue">{props.value}%</span>
+          <span className={canvasid + "-value"}>{props.value}%</span>
         )}
       </div>
       <style>{`
-        .progressValue {
+        .${canvasid + "-value"} {
           display: block;
           position: absolute;
           left: 50%;
@@ -160,7 +159,7 @@ function CircularProgress(props: {
           transform: translate(-50%, -50%);
           color: white;
         }
-        .progressWrap {
+        .${canvasid + "-wrapper"} {
           position: relative;
           width: ${dimension}px;
           height: ${dimension}px;
